@@ -25,7 +25,12 @@ const app = express();
 
 app.use(express.json()); // Middleware to parse JSON request bodies
 
-app.use(session({ secret: "fingerpint" })); // Middleware to handle sessions
+//app.use(session({ secret: "fingerpint" })); // Middleware to handle sessions
+app.use(session({
+    secret: "fingerpint",
+    resave: true,
+    saveUninitialized: true // or false, depending on your needs
+}));
 
 // Middleware to authenticate users using JWT
 app.use("/auth", function auth(req, res, next) {
